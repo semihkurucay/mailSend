@@ -24,11 +24,11 @@ public class main extends javax.swing.JFrame {
         try {
             JOptionPane.showMessageDialog(null, "Bu uygulama Gmail olan e-posta hesaplarınızda çalışır!\n\n"
                     + "Google Ayarlar>'Google Hesabında ara'>Uygulama Şifreleri\n\n"
-                    + "diyerek uygulama şifresi yaratıp boşluksuz giriş yapın","Bilgilendirme",JOptionPane.INFORMATION_MESSAGE);
-            
+                    + "diyerek uygulama şifresi yaratıp boşluksuz giriş yapın", "Bilgilendirme", JOptionPane.INFORMATION_MESSAGE);
+
             name = JOptionPane.showInputDialog(null, "Mail adresinizi girin;", "Mail Giriş", JOptionPane.PLAIN_MESSAGE);
             pass = JOptionPane.showInputDialog(null, "Mail adresinizin token bilgisini girin;", "Mail Giriş", JOptionPane.PLAIN_MESSAGE);
-            
+
             if (!name.trim().isEmpty() || !pass.trim().isEmpty()) {
                 if (!isLogin()) {
                     JOptionPane.showMessageDialog(null, "Yanlış bilgiler girildi, programdan çıkış yapılıyor", "Giriş Hatası", JOptionPane.ERROR_MESSAGE);
@@ -37,7 +37,7 @@ public class main extends javax.swing.JFrame {
 
                 initComponents();
                 setTitle(name.concat(" Hesaba giriş yapıldı"));
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Bilgi eksik", "Giriş Hatası", JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
@@ -73,8 +73,8 @@ public class main extends javax.swing.JFrame {
             });
 
             Transport transport = session.getTransport("smtp");
-            
-            transport.connect();  
+
+            transport.connect();
             boolean login = transport.isConnected();
             transport.close();
 
@@ -89,14 +89,14 @@ public class main extends javax.swing.JFrame {
             message = new MimeMessage(session);
             message.setFrom(new InternetAddress(name));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(txtTO.getText()));
-            if(!txtCC.getText().trim().isEmpty()){
+            if (!txtCC.getText().trim().isEmpty()) {
                 message.setRecipient(Message.RecipientType.CC, new InternetAddress(txtCC.getText()));
             }
             message.setSubject(txtSubject.getText());
             message.setText(txtMessage.getText());
 
             Transport.send(message);
-
+            JOptionPane.showMessageDialog(null, "Mail gönderimi başarıyla sağlandı", "Mail Gönderildi", JOptionPane.INFORMATION_MESSAGE);
         } catch (AddressException e) {
             JOptionPane.showMessageDialog(null, "Geçersiz adres: " + e.getMessage(), "Hata", JOptionPane.ERROR_MESSAGE);
         } catch (MessagingException e) {
@@ -187,7 +187,6 @@ public class main extends javax.swing.JFrame {
         jLabel3.setText("Konu :");
 
         txtSubject.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtSubject.setText("jTextField3");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -249,6 +248,7 @@ public class main extends javax.swing.JFrame {
 
         btnSend.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnSend.setText("GÖNDER");
+        btnSend.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendActionPerformed(evt);
