@@ -37,6 +37,9 @@ public class main extends javax.swing.JFrame {
 
                 initComponents();
                 setTitle(name.concat(" Hesaba giriş yapıldı"));
+            }else{
+                JOptionPane.showMessageDialog(null, "Bilgi eksik", "Giriş Hatası", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Bilgi eksik", "Giriş Hatası", JOptionPane.ERROR_MESSAGE);
